@@ -1,0 +1,2 @@
+rootProject.name='MyFrequentlyUsedViews'
+include ':app'
