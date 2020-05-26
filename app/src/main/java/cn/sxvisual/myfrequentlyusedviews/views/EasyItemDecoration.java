@@ -1,6 +1,5 @@
 package cn.sxvisual.myfrequentlyusedviews.views;
 
-import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -8,6 +7,8 @@ import android.graphics.Rect;
 import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Shixiuwen
@@ -27,32 +28,12 @@ public class EasyItemDecoration extends RecyclerView.ItemDecoration {
     private Paint dividerPaint;
     private int dividerColor;
 
-    private EasyItemDecoration(Builder builder) {
+    private EasyItemDecoration() {
         dividerPaint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.DITHER_FLAG);
-        //设置分割线颜色
-        if (builder.isTransparent) {
-            dividerPaint.setColor(Color.argb(0, 1, 1, 1));
-        } else {
-            dividerPaint.setColor(builder.color);
-        }
-        //是否透明
-        isTransparent = builder.isTransparent;
-        //分割线颜色
-        dividerColor = builder.color;
-        //设置分割线竖直方向高度
-        dividerHeight = builder.dividerHeight;
-        //设置分割线水平方向高度
-        dividerWidth = builder.dividerWidth;
-        //是否显示在顶部
-        containFirst = builder.containFirst;
-        //是否显示在底部
-        containLast = builder.containLast;
-        //设置方向
-        orientation = builder.orientation;
     }
 
     @Override
-    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+    public void getItemOffsets(@NotNull Rect outRect, @NotNull View view, @NotNull RecyclerView parent, @NotNull RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
         RecyclerView.Adapter adapter = parent.getAdapter();
         if (adapter == null) {
@@ -87,7 +68,7 @@ public class EasyItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     @Override
-    public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
+    public void onDraw(@NotNull Canvas c, @NotNull RecyclerView parent, @NotNull RecyclerView.State state) {
         super.onDraw(c, parent, state);
         if (isTransparent || dividerPaint.getAlpha() == 0) {
             return;
@@ -132,7 +113,6 @@ public class EasyItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     public static class Builder {
-        private Context context;
         private boolean containFirst = true;
         private boolean containLast = true;
         private boolean isTransparent = true;
@@ -141,12 +121,32 @@ public class EasyItemDecoration extends RecyclerView.ItemDecoration {
         private int dividerWidth = 10;
         private int orientation = EasyItemDecoration.ORIENTATION_VERTICAL;
 
-        public Builder(Context context) {
-            this.context = context;
+        public Builder() {
         }
 
-        public EasyItemDecoration create() {
-            return new EasyItemDecoration(this);
+        public EasyItemDecoration build() {
+            EasyItemDecoration decoration = new EasyItemDecoration();
+            //设置分割线颜色
+            if (isTransparent) {
+                decoration.dividerPaint.setColor(Color.argb(0, 1, 1, 1));
+            } else {
+                decoration.dividerPaint.setColor(color);
+            }
+            //是否透明
+            decoration.isTransparent = isTransparent;
+            //分割线颜色
+            decoration.dividerColor = color;
+            //设置分割线竖直方向高度
+            decoration.dividerHeight = dividerHeight;
+            //设置分割线水平方向高度
+            decoration.dividerWidth = dividerWidth;
+            //是否显示在顶部
+            decoration.containFirst = containFirst;
+            //是否显示在底部
+            decoration.containLast = containLast;
+            //设置方向
+            decoration.orientation = orientation;
+            return decoration;
         }
 
         public Builder setContainFirst(boolean containFirst) {
@@ -166,11 +166,6 @@ public class EasyItemDecoration extends RecyclerView.ItemDecoration {
 
         public Builder setDividerHeight(int dividerHeight) {
             this.dividerHeight = dividerHeight;
-            return this;
-        }
-
-        public Builder setContext(Context context) {
-            this.context = context;
             return this;
         }
 
