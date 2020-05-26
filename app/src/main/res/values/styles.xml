@@ -20,4 +20,30 @@
         <attr name="ctv_background" format="color" />
     </declare-styleable>
 
+    <declare-styleable name="CustomKeyValueView">
+        <attr name="ckv_title" format="string" />
+        <attr name="ckv_value" format="string" />
+        <attr name="ckv_icon_start_visible" format="boolean" />
+        <attr name="ckv_icon_end_visible" format="boolean" />
+        <attr name="ckv_value_editable" format="boolean" />
+        <attr name="ckv_icon_end_clickable" format="boolean" />
+        <attr name="ckv_key_length" format="dimension" />
+        <attr name="ckv_icon_start_res" format="reference" />
+        <attr name="ckv_icon_start_size" format="dimension" />
+        <attr name="ckv_icon_end_res" format="reference" />
+        <attr name="ckv_icon_end_size" format="dimension" />
+        <attr name="ckv_hint" format="string" />
+        <attr name="ckv_divider_visible" format="boolean" />
+        <attr name="ckv_edit_value_gravity" format="enum">
+            <enum name="center" value="17" />
+            <enum name="left" value="3" />
+            <enum name="right" value="5" />
+        </attr>
+        <attr name="ckv_digits" format="string" />
+        <!--输入类型根据需要自主添加-->
+        <attr name="ckv_input_type" format="enum">
+            <enum name="number" value="0x00000002" />
+        </attr>
+    </declare-styleable>
+
 </resources>
