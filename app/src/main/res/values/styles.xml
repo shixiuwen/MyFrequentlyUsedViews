@@ -8,4 +8,16 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <declare-styleable name="CommonTitleView">
+        <attr name="title" format="string" />
+        <attr name="icon" format="reference" />
+        <attr name="icon_sub" format="reference" />
+        <attr name="icon_visible" format="boolean" />
+        <attr name="icon_sub_visible" format="boolean" />
+        <attr name="back_visible" format="boolean" />
+        <attr name="tx_sub_name" format="string" />
+        <attr name="tx_sub_visible" format="boolean" />
+        <attr name="ctv_background" format="color" />
+    </declare-styleable>
+
 </resources>
